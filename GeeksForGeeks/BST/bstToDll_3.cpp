@@ -1,3 +1,11 @@
+/*
+ * This is simplest and most intuitive method to convert a bst to dll.
+ * We maintain a head and tail pointers. We figure out head once we traverse 
+ * left subtree. Once you know head, just keeping add nodes to the tail
+ * in  an inorder manner. In GFG this is 3rd solution for this problem.
+ * 
+ * */
+
 #include<iostream>
 #include<vector>
 #include<cmath>
@@ -92,7 +100,6 @@ void inorder(node  *root) //  without  stack and without recursion
 		}
 	}
 }
-
 
 void bstToDll(node  *root, node  **head, node **tail)
 {
