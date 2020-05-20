@@ -72,15 +72,13 @@ void inorder(node  *root) //  without  stack and without recursion
 		if (root->left != NULL)
 		{
 			node *rightMost = (root)->left;
-			node *tmp = (rightMost->right);
 
-			while (tmp != NULL && tmp != root)
+			while (rightMost != NULL && rightMost->right != NULL && rightMost->right != root)
 			{
-				rightMost = tmp;
-				tmp = tmp->right;
+				rightMost = rightMost->right;;
 			}
 
-			if (tmp == root)
+			if (rightMost->right == root)
 			{
 				rightMost->right = NULL;
 				cout  << root->data << " ";

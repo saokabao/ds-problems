@@ -105,13 +105,82 @@ void inorder(node *root) //morris
 }
 
 
+void printToRight(node *root)
+{
+	if (root==NULL) return;
+	cout  << root->data <<  "--";
+	printToRight(root->right);
+}
+
+void printToLeft(node *root)
+{
+	if (root==NULL) return;
+	cout  << root->data << "--";
+	printToLeft(root->left);
+}
+
+
+void bstToDll(node *root)
+{
+	if (root == NULL) return;
+
+	bstToDll(root->left);
+
+	node *rightMost = root->left;
+	while (rightMost != NULL && rightMost->right !=  NULL)
+	{
+		rightMost = rightMost->right;
+	}
+
+	if  (rightMost != NULL)
+	{
+		rightMost->right = root;
+	}
+
+	root->left = rightMost;
+
+	bstToDll(root->right);
+	
+	node  *leftMost = root->right;
+	while (leftMost != NULL && leftMost->left != NULL)
+	{
+		leftMost = leftMost->left;
+	}
+
+	if (leftMost != NULL)
+	{
+		leftMost->left  = root;
+	}
+
+	root->right  = leftMost;
+
+}
+
 int main()
 {
 	node *root = new node(15);
 	root->left = new node(10);
 	root->right = new node (25);
+	root->left->left = new node(5);
+	root->left->right  = new node(12);
+	root->right->left = new node(20);
+	root->right->right =  new node (30);
 
+	cout<<"INorder:\n";
 	inorder(root);
+	cout<<"\n\n";
+
+        bstToDll(root);
+	while (root->left != NULL)root= root->left;
+
+	cout <<"\n PrintToRight \n";
+	printToRight(root);
+
+        while (root->right!=NULL) root = root->right;
+
+	cout<<"\n PrintToLeft \n";
+	printToLeft(root);
+
 	cout<<"\n\n";
 	return 0;
 }
