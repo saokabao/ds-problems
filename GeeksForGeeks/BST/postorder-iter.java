@@ -64,6 +64,26 @@ class GFG{
 		}
 	}
 
+	static void postorder2(node A){
+		Stack<node> stack = new Stack<>();
+
+		while (A!=null || !stack.empty()){
+			while (A!=null){
+				stack.push(A);
+				stack.push(A);
+				A= A.left;
+			}
+
+			A = stack.pop();
+			if (!stack.empty() && A == stack.peek()) A = A.right;
+			else {
+				System.out.println(A.data);
+				A=null;
+			}
+
+		}
+	}
+
 	public static void main(String args[]){
 		root = new node(15);
 		root.left = new node(10);
@@ -75,6 +95,6 @@ class GFG{
 		root.right.left= new node(20);
 		root.right.right = new node(30);
 
-		postorder(root);
+		postorder2(root);
 	}
 }
