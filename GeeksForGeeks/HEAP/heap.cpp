@@ -34,6 +34,10 @@
  *   3. extractMin():  read the A[0], A[0]= A[last]. Heapify(0)
  *   4. delete(int index): decreaseKey of A[i] to -INF. Then  do extractMin.
  *
+ *   Suppose you have an array of integers. To make an binary heap out of this
+ *   would take O(n) operations, not O(nlogn) operations as it might seem to you.
+ *   Is it inplace? 
+ *   
  * */
 
 
@@ -202,6 +206,18 @@ int main()
        heap.decreaseKey(2,-5);
        pl("min:\n\n");
        pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
+      pl(heap.extractMin()); nl;nl;
 
 
     return 0;
