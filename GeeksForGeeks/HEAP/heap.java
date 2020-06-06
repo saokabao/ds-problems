@@ -1,4 +1,3 @@
-
 /*
  * Java ArrayList, Vector, array, List:
 
