@@ -15,14 +15,15 @@
  *  print k largest elements: n-1 to n-k
  *
  *  
- *  Max Heap: O(n) + O(kLogn). 
- *  Sorting O(nlogn)
+ *  1. Max Heap: O(n) + O(kLogn). 
  *  
- *  Bubble sort: O(n*k)
  *
- *  Min heap: O(k + (n-K)logK + klogk) = O(K + nLogK)
+ *  2. Sorting O(nlogn)
+ *  
+ *  3. Bubble sort: O(n*k)
  *
- *  Order statistic: if unsorted output: O(n), else O(n+klogk)
+ *  4. Min heap: O(k + (n-K)logK + klogk) = O(K + nLogK)
+ *
  *
  * */
 
