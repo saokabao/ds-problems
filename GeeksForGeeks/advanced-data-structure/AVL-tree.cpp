@@ -238,7 +238,77 @@ class node
 
 		return A;
 	}
+
+        node* getMin(node *root)
+	{
+		while(root->left!=NULL) root = root->left;
+		return root;
+	}
+	node* remove(node* root, int key)
+        {
+		if (root == NULL) return NULL;
+		else
+		{
+			if (key < root->key)
+			{
+				root->left = remove(root->left,key);
+			}
+			else if (key > root->key)
+			{
+				root->right = remove(root->right, key);
+			}
+			else
+			{
+				node *temp  = root;
+				if (root->left == NULL)
+				{
+					root = root->right;
+					delete temp;
+				}
+				else if (root->right == NULL)
+				{
+					root = root->left;
+					delete temp;
+				}
+				else
+				{
+					node* succ = getMin(root->right);
+					root->key = succ->key;
+
+					root->right = remove(root->right, succ->key);
+				}
+
+			}
+			root->height = max(getHeight(root->left) , getHeight(root->right)) + 1;
+
+			int balance = getBalance(root);
 		
+		        // left left	
+			if (balance > 1 && getBalance(root->left) >= 0)
+			{
+				
+			}
+
+			// left right
+			if (balance > 1 && getBalance(root->left) < 0)
+			{
+
+			}
+
+			//right right
+			if (balance < -1 && getBalance(root->right) < 0 )
+			{
+			
+			}
+
+			//right left
+			if (balance < -1 && getBalance(root->right) >= 0)
+			{
+			}
+			return root;
+		}
+	}
+
 
 int main()
 {
