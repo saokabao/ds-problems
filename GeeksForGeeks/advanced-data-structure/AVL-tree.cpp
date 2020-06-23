@@ -128,7 +128,7 @@ class node
 	node(int val)
 	{
 		key =val;
-		height =0;
+		height =1;
 		left=right=NULL;
 	}
 
@@ -167,7 +167,6 @@ class node
 
 		Y->height =  max(getHeight(Y->left), getHeight(Y->right)) +1 ;
                 X->height  = max(getHeight(X->left), getHeight(X->right)) +1 ;
-		cout << "node: "<<X->key << " ;s height is : "<< X->height<<"\n";
 		return X;
 	}
 
@@ -191,7 +190,6 @@ class node
 
 		Y->height =  max(getHeight(Y->left), getHeight(Y->right)) +1 ;
                 X->height  = max(getHeight(X->left), getHeight(X->right)) +1 ;
-		cout << "node: "<<Y->key << " ;s height is : "<< Y->height<<"\n";
 		return X;
 	}
 
@@ -210,10 +208,10 @@ class node
 		}
 	
 	        A->height = 1 + max (getHeight(A->left), getHeight(A->right));
-	        cout << "node: "<<A->key << " ;s height is : "<< A->height<<"\n";	
 		int balance = getBalance(A);
  
 		//left left
+//	        cout<<"node: "<<A->key<<" , balance: "<< balance<<endl;
 		if (balance > 1 && key < A->left->key )
 		{
 			return  rightRotate(A);
@@ -238,7 +236,84 @@ class node
 
 		return A;
 	}
+
+        node* getMin(node *root)
+	{
+		while(root->left!=NULL) root = root->left;
+		return root;
+	}
+
+	node* remove(node* root, int key)
+        {
+		if (root == NULL) return NULL;
+		else
+		{
+			if (key < root->key)
+			{
+				root->left = remove(root->left,key);
+			}
+			else if (key > root->key)
+			{
+				root->right = remove(root->right, key);
+			}
+			else
+			{
+				node *temp  = root;
+				if (root->left == NULL)
+				{
+					root = root->right;
+					delete temp;
+				}
+				else if (root->right == NULL)
+				{
+					root = root->left;
+					delete temp;
+				}
+				else
+				{
+					node* succ = getMin(root->right);
+					root->key = succ->key;
+
+					root->right = remove(root->right, succ->key);
+				}
+
+			}
+			if (root == NULL) return NULL;
+
+			root->height = max(getHeight(root->left) , getHeight(root->right)) + 1;
+
+			int balance = getBalance(root);
 		
+		        // left left	
+			if (balance > 1 && getBalance(root->left) >= 0)
+			{
+                               return leftRotate(root);								
+			}
+
+			// left right
+			if (balance > 1 && getBalance(root->left) < 0)
+			{
+				root->left  = leftRotate(root->left);
+				return rightRotate(root);
+			}
+
+			//right right
+			if (balance < -1 && getBalance(root->right) < 0 )
+			{
+				return leftRotate(root);
+			}
+
+			//right left
+			if (balance < -1 && getBalance(root->right) >= 0)
+			{
+				root->right = rightRotate(root->right);
+				return leftRotate(root);
+
+			}
+			return root;
+		}
+	}
+
 
 int main()
 {
@@ -247,10 +322,14 @@ int main()
 	root = insert(root,20);
 	root = insert(root,30);
 	root = insert(root,40);
+	
+	cout<<"root after 40: " << root->key<<"\n";
 	root = insert(root,50); 
 
 
-	cout<< "root's height: " << root->height<<"\n";
+	cout<< "root after 50: " << root->key<<"\n";
+	root = remove(root,15);
+	cout<< "root after remove 15: " << root->key<<"\n";
 	return 0;
 }
 
