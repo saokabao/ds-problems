@@ -242,8 +242,8 @@ class node
 		while(root->left!=NULL) root = root->left;
 		return root;
 	}
-
-	node* remove(node* root, int key)
+	
+node* remove(node* root, int key)
         {
 		if (root == NULL) return NULL;
 		else
@@ -288,6 +288,7 @@ class node
 			if (balance > 1 && getBalance(root->left) >= 0)
 			{
                                return leftRotate(root);								
+				
 			}
 
 			// left right
@@ -295,12 +296,14 @@ class node
 			{
 				root->left  = leftRotate(root->left);
 				return rightRotate(root);
+
 			}
 
 			//right right
 			if (balance < -1 && getBalance(root->right) < 0 )
 			{
 				return leftRotate(root);
+			
 			}
 
 			//right left
