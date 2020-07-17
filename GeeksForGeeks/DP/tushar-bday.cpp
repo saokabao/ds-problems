@@ -1,22 +1,3 @@
-/*
- *  https://www.interviewbit.com/problems/chain-of-pairs/
- *
- *  LIS problem with pairs. 
- *  Input is NX2 matrix. chain is formed between i and j if  A[i][1] < A[j][0].
- *  it is given A[i][0] < A[i][1].
- *
- *  find the longest increasing chain of tuples.
- *
- *  Solution: LIS solution with only comparison modified.
- *  O(n^2)
- *
- *  ToDo: Implement O(n) LIS solution to this problem.
- *  There is beautiful LIS solution using stack with O(n) time and O(1) space complexity.
- *
- *
- * */
-
-
 #include<iostream>
 #include<vector>
 #include<cmath>
@@ -64,36 +45,6 @@ typedef map<string,ll> msi;
 
 int main()
 {
-	pl("N: ");
-	ll n; cin>>n;
-	
-	pl("pairs: ");
-	vvi A(n,vi(2,0));
-	rep(i,n) cin>>A[i][0]>>A[i][1];
-	
-	
-	vi ans(n,1);
 
-	ll ret = 0;
-
-	fu(i,0,n-1)
-	{
-		fu(j,0,i-1)
-		{
-			if (A[j][1] < A[i][0])
-			{
-				ans[i] = max(ans[i], ans[j]+1);
-			}
-		}
-		ret = max(ret,ans[i]);
-	}
-
- 	pl("ans: ");
-	pl(ret);nl;nl;
-
-	return 0;
-
-
-		
 }
 

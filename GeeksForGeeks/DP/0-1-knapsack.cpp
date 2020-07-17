@@ -14,6 +14,13 @@
  *
  *  w(i,j) = max(w(i-B[j],j-1) + A[j], w(i,j-1));
  *
+ *  This solution takes space complexity of Capacity*(N+1).
+ *
+ *  Space complexity can be optimized by using a single array of Size 'Capacity'.
+ *  ans[capacity+1] : maximum value for capcity i is represented by ans[i].
+ *  
+ *
+ *
  *  https://www.interviewbit.com/problems/0-1-knapsack/
  *
  *
@@ -57,6 +64,7 @@ typedef map<string,ll> msi;
     #define fd(i,n,a) for(ll i=n;i>=a;i--)
     #define all(a)  a.begin(),a.end()
     #define pl(a) cout<<a
+    #define in(a) cin>>a
     #define nl cout<<endl
     #define present(container,element) container.find(element)!=container.end()
     #define cpresent(container,element) find(all(container),element)!=container.end()
@@ -68,6 +76,58 @@ typedef map<string,ll> msi;
 
 int main()
 {
+	cout<<"n: \n";
+	int n;
+	in(n);
+
+	cout<<"\n values: \n";
+	vi A(n);
+
+	fu(i,0,n-1) in(A[i]);
+
+	cout<<"\n weights: \n";
+	vi B(n); fu(i,0,n-1) in(B[i]);
+
+	pl("capacity: ");
+	ll C; in(C);
+	
+	vvi dp(C+1, vi(n,0));
+
+
+	fu(i,0,C)
+	{
+		fu(j,0,n-1)
+		{
+			if (i==0 && j==0)
+			{
+				if (B[0] == 0) dp[0][0] = A[0];
+			}
+                        else if (i==0)
+			{
+				if (B[j] == 0) dp[i][j] = dp[i][j-1] + A[j];
+			}
+			else if (j==0)
+			{
+				if  (i <= B[j])
+				{
+					dp[i][j] = A[j];
+				}
+			}
+			else
+			{
+				if (B[j] <= i)
+				{
+					dp[i][j] = max(dp[i-B[j]][j-1]+ A[j], dp[i][j-1]);
+				}
+				else dp[i][j] = dp[i][j-1];
+			}
+		}
+	}
+
+	pl("ans: ");
+	pl(dp[C][n-1]);nl;nl;
+
+
 
 }
 

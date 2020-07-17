@@ -1,20 +1,21 @@
 /*
- *  https://www.interviewbit.com/problems/chain-of-pairs/
+ * Input A[] of positive integers.
+ * Flip minimum number of elements such that total sum is minimum non negative.
  *
- *  LIS problem with pairs. 
- *  Input is NX2 matrix. chain is formed between i and j if  A[i][1] < A[j][0].
- *  it is given A[i][0] < A[i][1].
+ * Make a knapsack of capacity =Sum/2 and fill the knapsack with minimum numbers 
+ * such that highest capacity is obtained. 
  *
- *  find the longest increasing chain of tuples.
+ * A[capacity+1]
+ * A[i] : minimum elements required to make sum i.
+ * A[i] == INF : sum i cant be made.
  *
- *  Solution: LIS solution with only comparison modified.
- *  O(n^2)
- *
- *  ToDo: Implement O(n) LIS solution to this problem.
- *  There is beautiful LIS solution using stack with O(n) time and O(1) space complexity.
- *
+ * A[0] = 0;
+ * A[i] = if (A[i-B[j]] != INF ) A[i] = min(A[i-B[j]] + 1 , A[i]);
  *
  * */
+
+
+
 
 
 #include<iostream>
@@ -64,36 +65,40 @@ typedef map<string,ll> msi;
 
 int main()
 {
-	pl("N: ");
-	ll n; cin>>n;
+	int n; cin>>n;
+	vi A(n); ll sum=0;
+	rep(i,n) 
+	{
+		cin>>A[i];
+		sum+=A[i];
+	}
 	
-	pl("pairs: ");
-	vvi A(n,vi(2,0));
-	rep(i,n) cin>>A[i][0]>>A[i][1];
-	
-	
-	vi ans(n,1);
-
-	ll ret = 0;
+	ll C = sum/2;	
+	vi ans(C+1, INT_MAX);
+	ans[0] = 0;
 
 	fu(i,0,n-1)
 	{
-		fu(j,0,i-1)
+		fu(j, A[i], C)
 		{
-			if (A[j][1] < A[i][0])
+			if (ans[j-A[i]] != INT_MAX)
 			{
-				ans[i] = max(ans[i], ans[j]+1);
+				ans[j] = min(ans[j-A[i]]+1, ans[j]);
 			}
 		}
-		ret = max(ret,ans[i]);
 	}
 
- 	pl("ans: ");
-	pl(ret);nl;nl;
-
+	fd(j,C,0)
+	{
+		if (ans[j]!=INT_MAX)
+		{
+			pl("cout: ");pl(ans[j]);nl;
+			pl("j: ");pl(j);nl;
+			cout<< "\nans: "<< sum-2*j;nl;nl;
+			break;
+		}
+	}
 	return 0;
 
-
-		
 }
 
