@@ -3,6 +3,7 @@
  *  https://www.interviewbit.com/problems/max-edge-queries/
  *  Nodes 1 to N.
 
+https://www.youtube.com/watch?v=02zM-QoKoPg
 bidirectional edge with weight w1.
 
 maximum weighted edge in a simple path from u to v.

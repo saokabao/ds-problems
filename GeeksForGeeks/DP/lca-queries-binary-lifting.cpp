@@ -114,7 +114,7 @@ int main()
 	vector< vector<ll>> dp(n+1, vector<ll> (logN, 0));
 	vi lvl(n+1,0);
 
-	dfs(1,0, logN, dp, adj, lvl); // assuming 0 is root. 
+	dfs(3,0, logN, dp, adj, lvl); // assuming 0 is root. 
 
 	pl("queries: ");nl;
 	ll q; cin>>q;
