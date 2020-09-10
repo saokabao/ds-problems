@@ -69,6 +69,6 @@ typedef map<string,ll> msi;
 
 int main()
 {
-
+  //write code
 }
 
