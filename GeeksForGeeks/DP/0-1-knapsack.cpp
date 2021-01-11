@@ -22,6 +22,8 @@
  *
  *
  *  https://www.interviewbit.com/problems/0-1-knapsack/
+ *  https://leetcode.com/discuss/interview-question/938623/amazon-sde-2-hyderabad-phone-screen
+ *
  *
  *
  * */
